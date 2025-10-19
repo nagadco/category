@@ -1,0 +1,615 @@
+[
+  {
+    "id": 16,
+    "name_ar": "خدمات السيارات",
+    "name_en": "Automotive Services",
+    "code": "AS",
+    "related_category": [
+      "SHP"
+    ],
+    "description_ar": "خدمات تتعلق بصيانة وإصلاح السيارات.",
+    "description_en": "Services related to the maintenance and repair of vehicles.",
+    "search_key_words_en": [
+      "auto repair",
+      "auto accessories",
+      "car",
+      "automobile",
+      "auto shop",
+      "auto service",
+      "vehicle",
+      "business",
+      "automotive",
+      "provider",
+      "services",
+      "company",
+      "car accessories",
+      "auto parts",
+      "Automotive Services"
+    ],
+    "search_key_words_ar": [
+      "مقدم خدمة",
+      "كار",
+      "أوتو",
+      "تويوتا",
+      "نيسان",
+      "مرسيدس",
+      "عربيات",
+      "السيارات",
+      "خدمات",
+      "مزود خدمة",
+      "خدمة",
+      "سيارة",
+      "خدمات السيارات",
+      "سياره",
+      "هوندا",
+      "عربية",
+      "خدمه",
+      "عربيه",
+      "مركبة",
+      "services",
+      "مركبات",
+      "service"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 9,
+    "name_ar": "الفنادق والإقامة",
+    "name_en": "Hotels and Accommodations",
+    "code": "HTL",
+    "related_category": [],
+    "description_ar": "أماكن الإقامة بما في ذلك الفنادق، الموتيلات، والشقق المخدومة.",
+    "description_en": "Places for lodging including hotels, motels, and serviced apartments.",
+    "search_key_words_en": [
+      "accommodation",
+      "resort",
+      "Hotels and Accommodations",
+      "inn",
+      "Hotels & Accommodations",
+      "hospitality",
+      "lodging"
+    ],
+    "search_key_words_ar": [
+      "الفنادق",
+      "والإقامة",
+      "الفنادق والإقامة"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 17,
+    "name_ar": "النقل",
+    "name_en": "Transportation",
+    "code": "TR",
+    "related_category": [],
+    "description_ar": "خدمات ومرافق تتعلق بحركة الأفراد والبضائع.",
+    "description_en": "Services and facilities related to the movement of people and goods.",
+    "search_key_words_en": [
+      "Transportation"
+    ],
+    "search_key_words_ar": [
+      "النقل"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 19,
+    "name_ar": "الشركات",
+    "name_en": "Corporate",
+    "code": "CPT",
+    "related_category": [],
+    "description_ar": "شركات تعمل كمقر رئيسي لخدمات وصناعات مختلفة.",
+    "description_en": "Companies serving as headquarters for various services and industries.",
+    "search_key_words_en": [
+      "Corporate"
+    ],
+    "search_key_words_ar": [
+      "الشركات"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 3,
+    "name_ar": "مقاهي",
+    "name_en": "Coffee Shops",
+    "code": "CS",
+    "related_category": [
+      "ENT",
+      "FB"
+    ],
+    "description_ar": "أماكن تقدم أنواع مختلفة من القهوة والشاي والوجبات الخفيفة.",
+    "description_en": "Establishments serving various types of coffee, tea, and snacks.",
+    "search_key_words_en": [
+      "shopping coffees",
+      "espresso",
+      "Coffee Shops",
+      "espresso bar",
+      "cafe",
+      "buy coffees",
+      "coffee bar",
+      "coffee shop",
+      "cafeteria",
+      "purchase coffees",
+      "coffee house",
+      "merchant coffees",
+      "sell coffees"
+    ],
+    "search_key_words_ar": [
+      "مقاهي"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 23,
+    "name_ar": "احتياجات المنزل",
+    "name_en": "Home Goods",
+    "code": "Home_G",
+    "related_category": [
+      "SHP"
+    ],
+    "description_ar": "خدمات ومنتجات المنزل",
+    "description_en": "Services and products related to home decoration and furnishing.",
+    "search_key_words_en": [
+      "Home Goods"
+    ],
+    "search_key_words_ar": [
+      "المنزل",
+      "احتياجات المنزل",
+      "احتياجات"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 1,
+    "name_ar": "مطاعم",
+    "name_en": "Restaurants",
+    "code": "RST",
+    "related_category": [
+      "FB",
+      "CS"
+    ],
+    "description_ar": "مطاعم مختصة",
+    "description_en": "Resturants serving food including a variety of cuisines",
+    "search_key_words_en": [
+      "Restaurants",
+      "diner",
+      "dining",
+      "bistro",
+      "cafe",
+      "food service",
+      "eatery",
+      "food",
+      "cuisine"
+    ],
+    "search_key_words_ar": [
+      "مطاعم"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 2,
+    "name_ar": "المأكولات والمشروبات",
+    "name_en": "Food and Beverages",
+    "code": "FB",
+    "related_category": [
+      "RST",
+      "CS"
+    ],
+    "description_ar": "أماكن تقديم الطعام والمشروبات بما في ذلك مجموعة متنوعة من المأكولات والمقاهي ومحلات العصير",
+    "description_en": "Places serving food and beverages including a variety of cuisines, cafes, and juice shops.",
+    "search_key_words_en": [
+      "Food & Beverages",
+      "Food and Beverages"
+    ],
+    "search_key_words_ar": [
+      "سبرايت",
+      "سفن اب",
+      "قهوة",
+      "المأكولات والمشروبات",
+      "كوكاكولا",
+      "المأكولات",
+      "شاي",
+      "مشروب",
+      "drinks",
+      "والمشروبات",
+      "عصير",
+      "ميراندا",
+      "بيبسي",
+      "beverages"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 8,
+    "name_ar": "التسوق",
+    "name_en": "Shopping",
+    "code": "SHP",
+    "related_category": [
+      "CPT",
+      "PHM",
+      "GRO"
+    ],
+    "description_ar": "مناطق التسوق بما في ذلك المولات والمتاجر المتخصصة والأسواق التقليدية.",
+    "description_en": "Shopping areas including malls, specialty stores, and traditional markets.",
+    "search_key_words_en": [
+      "sell shopping",
+      "shopping shopping",
+      "merchant shopping",
+      "buy shopping",
+      "purchase shopping",
+      "Shopping"
+    ],
+    "search_key_words_ar": [
+      "التسوق"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 14,
+    "name_ar": "محطات الوقود",
+    "name_en": "Fuel Stations",
+    "code": "FST",
+    "related_category": [
+      "TR",
+      "AS"
+    ],
+    "description_ar": "أماكن توفر البنزين والديزل وشحن السيارات الكهربائية.",
+    "description_en": "Locations providing gasoline, diesel, and electric vehicle charging.",
+    "search_key_words_en": [
+      "Fuel Stations"
+    ],
+    "search_key_words_ar": [
+      "محطات",
+      "محطات الوقود",
+      "الوقود"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 12,
+    "name_ar": "مساجد",
+    "name_en": "Mosques",
+    "code": "MOS",
+    "related_category": [],
+    "description_ar": "أماكن دينية للصلاة والعبادة الإسلامية.",
+    "description_en": "Religious places for Islamic worship and prayer.",
+    "search_key_words_en": [
+      "Mosques"
+    ],
+    "search_key_words_ar": [
+      "مساجد"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 13,
+    "name_ar": "مستشفيات",
+    "name_en": "Hospitals",
+    "code": "HSP",
+    "related_category": [
+      "PHM"
+    ],
+    "description_ar": "منشآت تقدم الرعاية الطبية والعلاج والخدمات الطارئة.",
+    "description_en": "Facilities offering medical care, treatment, and emergency services.",
+    "search_key_words_en": [
+      "Hospitals",
+      "medical center",
+      "medical facility",
+      "health facility"
+    ],
+    "search_key_words_ar": [
+      "مستشفيات"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 22,
+    "name_ar": "الجمال والعناية",
+    "name_en": "Beauty and Spa",
+    "code": "BEA_SPA",
+    "related_category": [
+      "HSP"
+    ],
+    "description_ar": "خدمات متعلقة بعلاجات الجمال وخدمات السبا.",
+    "description_en": "Services related to beauty treatments and spa services.",
+    "search_key_words_en": [
+      "makeup",
+      "cosmetics",
+      "beauty products",
+      "Beauty and Spa",
+      "Beauty & Spa",
+      "skincare"
+    ],
+    "search_key_words_ar": [
+      "الجمال والعناية",
+      "الجمال",
+      "والعناية"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 4,
+    "name_ar": "الترفيه",
+    "name_en": "Entertainment",
+    "code": "ENT",
+    "related_category": [
+      "ENT",
+      "CUL"
+    ],
+    "description_ar": "خيارات ترفيهية عائلية بما في ذلك السينما، الموسيقى الحية، وغرف الألعاب.",
+    "description_en": "Family-friendly entertainment options including cinemas, live music, and video game arcades.",
+    "search_key_words_en": [
+      "Entertainment"
+    ],
+    "search_key_words_ar": [
+      "الترفيه"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 21,
+    "name_ar": "الرياضة",
+    "name_en": "Sports",
+    "code": "SP",
+    "related_category": [],
+    "description_ar": "أنشطة رياضية مختلفة وأندية تقدم التدريب .",
+    "description_en": "Various sports activities and clubs providing training and facilities popular in Saudi Arabia.",
+    "search_key_words_en": [
+      "athletic",
+      "sporting goods",
+      "Sports",
+      "fitness equipment"
+    ],
+    "search_key_words_ar": [
+      "الرياضة",
+      "جيم",
+      "تمارين",
+      "معدات رياضية",
+      "fitness",
+      "رياضية",
+      "نادي",
+      "gym",
+      "لياقة"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 11,
+    "name_ar": "التموينات",
+    "name_en": "Grocery",
+    "code": "GRO",
+    "related_category": [],
+    "description_ar": "متاجر بقالة تقدم مجموعة متنوعة من الأطعمة والمشروبات والمنتجات المنزلية.",
+    "description_en": "Grocery stores offering a wide variety of food, beverages, and household products.",
+    "search_key_words_en": [
+      "Grocery"
+    ],
+    "search_key_words_ar": [
+      "طعام",
+      "حفلات",
+      "خدمات طعام",
+      "التموينات"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 20,
+    "name_ar": "الخدمات العامة",
+    "name_en": "Public Services",
+    "code": "PSV",
+    "related_category": [
+      "MOS"
+    ],
+    "description_ar": "ومؤسسات عامة تقدم خدمات المجتمع.",
+    "description_en": "Libraries and public institutions providing community services.",
+    "search_key_words_en": [
+      "Public Services",
+      "business",
+      "provider",
+      "services",
+      "company"
+    ],
+    "search_key_words_ar": [
+      "مزود خدمة",
+      "خدمة",
+      "مقدم خدمة",
+      "services",
+      "service",
+      "خدمه",
+      "العامة",
+      "الخدمات العامة",
+      "الخدمات"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 18,
+    "name_ar": "التعليم",
+    "name_en": "Education",
+    "code": "ED",
+    "related_category": [],
+    "description_ar": "مدارس ومؤسسات تعليمية تقدم برامج تعليمية متنوعة.",
+    "description_en": "Schools and educational institutions providing various learning programs.",
+    "search_key_words_en": [
+      "Education"
+    ],
+    "search_key_words_ar": [
+      "التعليم"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 24,
+    "name_ar": "الخدمات الحكومية",
+    "name_en": "Government Services",
+    "code": "GOV",
+    "related_category": [],
+    "description_ar": "المؤسسات الحكومية والخدمات التي تقدم الإدارة العامة ودعم المجتمع.",
+    "description_en": "Government institutions and services providing public administration and community support.",
+    "search_key_words_en": [
+      "business",
+      "provider",
+      "Government Services",
+      "services",
+      "company"
+    ],
+    "search_key_words_ar": [
+      "مزود خدمة",
+      "الخدمات الحكومية",
+      "خدمة",
+      "مقدم خدمة",
+      "services",
+      "الحكومية",
+      "service",
+      "خدمه",
+      "الخدمات"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 7,
+    "name_ar": "الحدائق العامة",
+    "name_en": "Public Parks",
+    "code": "PRK",
+    "related_category": [
+      "PRK",
+      "NAT"
+    ],
+    "description_ar": "مساحات مفتوحة للتنزه والترفيه، غالبًا تحتوي على ملاعب ومسارات للمشي.",
+    "description_en": "Open spaces for recreation and leisure, often with playgrounds and walking paths.",
+    "search_key_words_en": [
+      "Public Parks"
+    ],
+    "search_key_words_ar": [
+      "الحدائق العامة",
+      "العامة",
+      "الحدائق"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 10,
+    "name_ar": "صيدليات",
+    "name_en": "Pharmacies",
+    "code": "PHM",
+    "related_category": [
+      "HSP"
+    ],
+    "description_ar": "أماكن توفر الأدوية الموصوفة والأدوية التي لا تحتاج لوصفة طبية ومنتجات صحية.",
+    "description_en": "Locations offering prescription medications, over-the-counter drugs, and health products.",
+    "search_key_words_en": [
+      "Pharmacies"
+    ],
+    "search_key_words_ar": [
+      "صيدليات"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 5,
+    "name_ar": "مواقع ثقافية",
+    "name_en": "Cultural Sites",
+    "code": "CUL",
+    "related_category": [
+      "ENT"
+    ],
+    "description_ar": "مواقع ثقافية وتاريخية بما في ذلك المتاحف والمعارض والأماكن الدينية.",
+    "description_en": "Cultural and historical sites including museums, galleries, and religious places.",
+    "search_key_words_en": [
+      "Cultural Sites"
+    ],
+    "search_key_words_ar": [
+      "مواقع ثقافية",
+      "مواقع",
+      "ثقافية"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 15,
+    "name_ar": "البنوك",
+    "name_en": "Banks",
+    "code": "BNK",
+    "related_category": [
+      "CPT"
+    ],
+    "description_ar": "مؤسسات مالية تقدم خدمات مصرفية مثل الادخار والقروض وصرف العملات.",
+    "description_en": "Financial institutions offering banking services such as savings, loans, and currency exchange.",
+    "search_key_words_en": [
+      "Banks",
+      "financial institution",
+      "banking",
+      "finance"
+    ],
+    "search_key_words_ar": [
+      "البنوك"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  },
+  {
+    "id": 6,
+    "name_ar": "الطبيعة",
+    "name_en": "Nature",
+    "code": "NAT",
+    "related_category": [
+      "PRK"
+    ],
+    "description_ar": "معالم طبيعية وحدائق بما في ذلك مواقع التخييم في الصحراء والجبال والشواطئ.",
+    "description_en": "Natural attractions and parks including desert camping sites, mountains, and beaches often with playgrounds and walking paths.",
+    "search_key_words_en": [
+      "Nature"
+    ],
+    "search_key_words_ar": [
+      "الطبيعة"
+    ],
+    "parent_id": null,
+    "created_at": "2024-12-01T11:08:28.279Z",
+    "updated_at": "2024-12-01T11:08:28.899Z"
+  }
+]
