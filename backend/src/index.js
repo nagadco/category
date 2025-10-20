@@ -52,6 +52,24 @@ async function writeCategories(categories) {
   return true;
 }
 
+// Root route
+app.get('/', (req, res) => {
+  res.type('text/plain').send(
+    [
+      'Categories Backend API',
+      '',
+      'Available endpoints:',
+      '- GET  /health',
+      '- GET  /categories',
+      '- POST /categories   (requires x-api-token if configured)',
+      '- PUT  /categories    (requires x-api-token if configured)',
+      '- DELETE /categories  (requires x-api-token if configured)',
+      '- GET  /pois',
+      ''
+    ].join('\n')
+  );
+});
+
 app.get('/health', (req, res) => {
   res.json({ ok: true, env: process.env.NODE_ENV || 'development' });
 });
