@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { matchCategories, Category, CategoryMatch } from '@/lib/categoryMatcher';
+import categoriesData from '@/data/categories.json';
 
 export default function Home() {
   const [storeName, setStoreName] = useState('');
@@ -16,25 +17,15 @@ export default function Home() {
   const [isAddingKeyword, setIsAddingKeyword] = useState(false);
   const [addKeywordMessage, setAddKeywordMessage] = useState('');
 
-  // تحميل البيانات
+  // تحميل البيانات مباشرة من الملف (بدون API)
   useEffect(() => {
-    async function loadCategories() {
-      try {
-        const response = await fetch('/api/categories');
-        const result = await response.json();
-        if (result.ok) {
-          setCategories(result.data);
-        } else {
-          console.error('خطأ في تحميل التصنيفات:', result.error);
-        }
-        setIsLoading(false);
-      } catch (error) {
-        console.error('خطأ في تحميل التصنيفات:', error);
-        setIsLoading(false);
-      }
+    try {
+      setCategories(categoriesData as Category[]);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('خطأ في تحميل التصنيفات:', error);
+      setIsLoading(false);
     }
-
-    loadCategories();
   }, []);
 
   // البحث التلقائي عند تغيير النص

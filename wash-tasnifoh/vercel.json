@@ -1,8 +1,10 @@
 {
   "functions": {
     "app/api/**/*.ts": {
-      "maxDuration": 30
+      "maxDuration": 60
     }
   },
-  "outputFileTracing": true
+  "outputFileTracing": true,
+  "buildCommand": "next build",
+  "installCommand": "npm install"
 }
