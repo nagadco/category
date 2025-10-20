@@ -9,6 +9,12 @@ export default function Home() {
   const [predictions, setPredictions] = useState<CategoryMatch[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<CategoryMatch | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showAddKeywordModal, setShowAddKeywordModal] = useState(false);
+  const [selectedCategoryForKeyword, setSelectedCategoryForKeyword] = useState<Category | null>(null);
+  const [newKeywordAr, setNewKeywordAr] = useState('');
+  const [newKeywordEn, setNewKeywordEn] = useState('');
+  const [isAddingKeyword, setIsAddingKeyword] = useState(false);
+  const [addKeywordMessage, setAddKeywordMessage] = useState('');
 
   // تحميل البيانات
   useEffect(() => {
@@ -46,6 +52,80 @@ export default function Home() {
       setSelectedCategory(null);
     }
   }, [storeName, categories]);
+
+  // دالة لإضافة كلمة مفتاحية
+  const handleAddKeyword = async () => {
+    if (!selectedCategoryForKeyword || (!newKeywordAr.trim() && !newKeywordEn.trim())) {
+      setAddKeywordMessage('يرجى إدخال كلمة مفتاحية واحدة على الأقل');
+      return;
+    }
+
+    setIsAddingKeyword(true);
+    setAddKeywordMessage('');
+
+    try {
+      const response = await fetch('/api/categories/add-keyword', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          categoryId: selectedCategoryForKeyword.id,
+          keyword_ar: newKeywordAr.trim(),
+          keyword_en: newKeywordEn.trim(),
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.ok) {
+        setAddKeywordMessage('✅ تم إضافة الكلمة المفتاحية بنجاح!');
+
+        // تحديث التصنيفات المحلية
+        setCategories(prev => prev.map(cat =>
+          cat.id === selectedCategoryForKeyword.id ? result.data : cat
+        ));
+
+        // إعادة تعيين الحقول
+        setTimeout(() => {
+          setNewKeywordAr('');
+          setNewKeywordEn('');
+          setShowAddKeywordModal(false);
+          setAddKeywordMessage('');
+
+          // إعادة البحث
+          if (storeName.trim()) {
+            const matches = matchCategories(storeName, categories, 5);
+            setPredictions(matches);
+            if (matches.length > 0) {
+              setSelectedCategory(matches[0]);
+            }
+          }
+        }, 2000);
+      } else {
+        setAddKeywordMessage('❌ ' + result.error);
+      }
+    } catch (error) {
+      console.error('خطأ في إضافة الكلمة المفتاحية:', error);
+      setAddKeywordMessage('❌ حدث خطأ أثناء الإضافة');
+    } finally {
+      setIsAddingKeyword(false);
+    }
+  };
+
+  const openAddKeywordModal = (category?: Category) => {
+    setSelectedCategoryForKeyword(category || null);
+    setNewKeywordAr(storeName); // تعبئة تلقائية بكلمة البحث
+    setNewKeywordEn('');
+    setShowAddKeywordModal(true);
+    setAddKeywordMessage('');
+  };
+
+  // دالة للحصول على التصنيف الأب
+  const getParentCategory = (categoryId: number | null): Category | null => {
+    if (!categoryId) return null;
+    return categories.find(cat => cat.id === categoryId) || null;
+  };
 
   // أمثلة للتجربة
   const examples = [
@@ -254,9 +334,21 @@ export default function Home() {
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
               لم نجد تصنيفًا مناسبًا
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               حاول استخدام كلمات مختلفة أو جرّب أحد الأمثلة أعلاه
             </p>
+
+            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                💡 هل تريد إضافة "<strong>{storeName}</strong>" كلمة مفتاحية لتصنيف معين؟
+              </p>
+              <button
+                onClick={() => openAddKeywordModal()}
+                className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+              >
+                ➕ إضافة كلمة مفتاحية جديدة
+              </button>
+            </div>
           </div>
         )}
 
@@ -307,6 +399,123 @@ export default function Home() {
           </div>
         </footer>
       </div>
+
+      {/* Modal for adding keywords */}
+      {showAddKeywordModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full p-8">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                إضافة كلمة مفتاحية جديدة
+              </h2>
+              <button
+                onClick={() => {
+                  setShowAddKeywordModal(false);
+                  setAddKeywordMessage('');
+                }}
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  اختر التصنيف
+                </label>
+                <select
+                  value={selectedCategoryForKeyword?.id || ''}
+                  onChange={(e) => {
+                    const categoryId = Number(e.target.value);
+                    const category = categories.find(cat => cat.id === categoryId);
+                    setSelectedCategoryForKeyword(category || null);
+                  }}
+                  className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                  dir="rtl"
+                >
+                  <option value="">-- اختر التصنيف --</option>
+                  {categories.map((cat) => {
+                    const parent = getParentCategory(cat.parent_id);
+                    const displayName = parent
+                      ? `${parent.name_ar} ← ${cat.name_ar}`
+                      : cat.name_ar;
+
+                    return (
+                      <option key={cat.id} value={cat.id}>
+                        {displayName} ({cat.code})
+                      </option>
+                    );
+                  })}
+                </select>
+                {selectedCategoryForKeyword && (
+                  <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-sm">
+                    <p className="text-gray-600 dark:text-gray-400">
+                      {selectedCategoryForKeyword.name_en}
+                    </p>
+                  </div>
+                )}
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  الكلمة المفتاحية بالعربي
+                </label>
+                <input
+                  type="text"
+                  value={newKeywordAr}
+                  onChange={(e) => setNewKeywordAr(e.target.value)}
+                  placeholder="مثال: تميس، مخبز، فطائر"
+                  className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                  dir="rtl"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  الكلمة المفتاحية بالإنجليزي (اختياري)
+                </label>
+                <input
+                  type="text"
+                  value={newKeywordEn}
+                  onChange={(e) => setNewKeywordEn(e.target.value)}
+                  placeholder="Example: bakery, bread, tamees"
+                  className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-4 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                  dir="ltr"
+                />
+              </div>
+
+              {addKeywordMessage && (
+                <div className={`p-4 rounded-xl ${
+                  addKeywordMessage.includes('✅')
+                    ? 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200'
+                    : 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200'
+                }`}>
+                  {addKeywordMessage}
+                </div>
+              )}
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  onClick={handleAddKeyword}
+                  disabled={isAddingKeyword || (!newKeywordAr.trim() && !newKeywordEn.trim())}
+                  className="flex-1 px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white font-semibold rounded-xl transition-colors disabled:cursor-not-allowed"
+                >
+                  {isAddingKeyword ? 'جاري الإضافة...' : 'إضافة الكلمة المفتاحية'}
+                </button>
+                <button
+                  onClick={() => {
+                    setShowAddKeywordModal(false);
+                    setAddKeywordMessage('');
+                  }}
+                  className="px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-semibold rounded-xl transition-colors"
+                >
+                  إلغاء
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
