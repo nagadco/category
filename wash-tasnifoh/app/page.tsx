@@ -40,7 +40,8 @@ export default function Home() {
   // البحث التلقائي عند تغيير النص
   useEffect(() => {
     if (storeName.trim().length > 0 && categories.length > 0) {
-      const matches = matchCategories(storeName, categories, 5);
+      // عرض المزيد من النتائج (20 بدلاً من 5)
+      const matches = matchCategories(storeName, categories, 20);
       setPredictions(matches);
 
       // اختيار أفضل نتيجة تلقائيًا
@@ -127,15 +128,61 @@ export default function Home() {
     return categories.find(cat => cat.id === categoryId) || null;
   };
 
+  // دالة لحفظ الاختيار الصحيح
+  const handleSaveCorrectChoice = async (match: CategoryMatch) => {
+    if (!storeName.trim()) return;
+
+    setIsAddingKeyword(true);
+    setAddKeywordMessage('');
+
+    try {
+      const response = await fetch('/api/categories/add-keyword', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          categoryId: match.category.id,
+          keyword_ar: storeName.trim(),
+          keyword_en: '',
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.ok) {
+        // تحديث التصنيفات المحلية
+        setCategories(prev => prev.map(cat =>
+          cat.id === match.category.id ? result.data : cat
+        ));
+
+        // عرض رسالة نجاح
+        alert(`✅ تم حفظ "${storeName}" كاختيار صحيح للتصنيف: ${match.category.name_ar}`);
+
+        // إعادة البحث
+        const matches = matchCategories(storeName, categories, 20);
+        setPredictions(matches);
+      } else {
+        alert('❌ ' + result.error);
+      }
+    } catch (error) {
+      console.error('خطأ في حفظ الاختيار:', error);
+      alert('❌ حدث خطأ أثناء الحفظ');
+    } finally {
+      setIsAddingKeyword(false);
+    }
+  };
+
   // أمثلة للتجربة
   const examples = [
+    'بقالة',
+    'مخبز تميس',
     'عبدالله لزينة السيارات',
     'مطعم البيك',
     'صيدلية النهدي',
     'كافيه ستاربكس',
     'مغسلة الأمانة',
-    'محل ورود وزهور',
-    'متجر الإلكترونيات'
+    'محل ورود وزهور'
   ];
 
   return (
@@ -147,7 +194,7 @@ export default function Home() {
             وش تصنيفه؟ 🔍
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300">
-            اكتب اسم أي محل واعرف تصنيفه فورًا
+            اكتب اسم المحل، شاهد جميع التصنيفات المحتملة، واختر الصحيح
           </p>
         </header>
 
@@ -197,9 +244,18 @@ export default function Home() {
         {/* النتيجة الرئيسية */}
         {selectedCategory && !isLoading && (
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              التصنيف الأنسب
-            </h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                التصنيف الأنسب
+              </h2>
+              <button
+                onClick={() => handleSaveCorrectChoice(selectedCategory)}
+                disabled={isAddingKeyword}
+                className="px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-semibold rounded-lg transition-colors disabled:cursor-not-allowed flex items-center gap-2"
+              >
+                ✓ حفظ كاختيار صحيح
+              </button>
+            </div>
             <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl shadow-2xl p-8 text-white transform hover:scale-105 transition-transform cursor-pointer">
               {/* Category & Subcategory Header */}
               {selectedCategory.parentCategory && (
@@ -263,7 +319,7 @@ export default function Home() {
         {predictions.length > 1 && !isLoading && (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              اقتراحات أخرى
+              جميع التصنيفات المحتملة ({predictions.length - 1} تصنيف)
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {predictions.slice(1).map((match, index) => (
@@ -318,7 +374,20 @@ export default function Home() {
                     </div>
                   )}
 
-                  <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+                  <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSaveCorrectChoice(match);
+                      }}
+                      disabled={isAddingKeyword}
+                      className="w-full px-3 py-2 bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white text-sm font-semibold rounded-lg transition-colors disabled:cursor-not-allowed"
+                    >
+                      ✓ حفظ كاختيار صحيح
+                    </button>
+                  </div>
+
+                  <div className="mt-2 text-xs text-gray-500 dark:text-gray-400 text-center">
                     {match.category.code}
                   </div>
                 </div>
