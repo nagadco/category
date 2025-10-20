@@ -3,6 +3,11 @@ import fs from 'fs/promises';
 import path from 'path';
 import { Category } from '@/lib/categoryMatcher';
 
+// Configure runtime for Vercel
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
+
 const REMOTE_BASE = process.env.CATEGORIES_API_URL?.replace(/\/$/, '');
 const REMOTE_TOKEN = process.env.CATEGORIES_API_TOKEN || '';
 
@@ -11,7 +16,18 @@ const basePath = path.join(dataDir, 'categories.json');
 const mergedPath = path.join(dataDir, 'categories_merged.json');
 const bundledPath = path.join(dataDir, 'categories_bundled.json');
 
+// In-memory cache to avoid re-reading large file
+let categoriesCache: Category[] | null = null;
+let cacheTimestamp = 0;
+const CACHE_TTL = 60000; // 1 minute cache
+
 async function readCategories(): Promise<Category[]> {
+  // Use cache if available and fresh
+  const now = Date.now();
+  if (categoriesCache && (now - cacheTimestamp) < CACHE_TTL) {
+    return categoriesCache;
+  }
+
   // Prefer bundled -> merged -> base
   let src = bundledPath;
   try {
@@ -21,7 +37,13 @@ async function readCategories(): Promise<Category[]> {
     try { await fs.access(src); } catch { src = basePath; }
   }
   const raw = await fs.readFile(src, 'utf8');
-  return JSON.parse(raw);
+  const data = JSON.parse(raw);
+
+  // Update cache
+  categoriesCache = data;
+  cacheTimestamp = now;
+
+  return data;
 }
 
 async function writeCategories(categories: Category[]) {

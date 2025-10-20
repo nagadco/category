@@ -3,6 +3,11 @@ import fs from 'fs/promises';
 import path from 'path';
 import { Category } from '@/lib/categoryMatcher';
 
+// Configure runtime for Vercel
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
+
 const REMOTE_BASE = process.env.CATEGORIES_API_URL?.replace(/\/$/, '');
 const REMOTE_TOKEN = process.env.CATEGORIES_API_TOKEN || '';
 
