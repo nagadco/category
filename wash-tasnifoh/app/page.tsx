@@ -14,9 +14,13 @@ export default function Home() {
   useEffect(() => {
     async function loadCategories() {
       try {
-        const response = await fetch('/data/categories.json');
-        const data = await response.json();
-        setCategories(data);
+        const response = await fetch('/api/categories');
+        const result = await response.json();
+        if (result.ok) {
+          setCategories(result.data);
+        } else {
+          console.error('خطأ في تحميل التصنيفات:', result.error);
+        }
         setIsLoading(false);
       } catch (error) {
         console.error('خطأ في تحميل التصنيفات:', error);
